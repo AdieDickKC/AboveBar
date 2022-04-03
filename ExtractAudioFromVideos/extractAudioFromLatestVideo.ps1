@@ -21,6 +21,10 @@ Foreach ($infileObject in $lastVideos) {
 
 	echo "Processing $infile to $outfile"
 	ffmpeg -i $infile -codec:a libmp3lame -q:a 3 "C:\Users\ABC Video Recorder\Dropbox\ABC Recordings\$outfile"
+    if (-not(Test-Path -Path "C:\Users\ABC Video Recorder\Dropbox\ABC Recordings\$outfile" -PathType Leaf)) {
+        throw "Error writing mp3 file - will not continue"
+    }
+
 
     echo "Backing up to external drive F:"
     Copy-Item "$infile" "F:\ABC Service Videos Backup\"
@@ -40,4 +44,3 @@ Foreach ($infileObject in $lastVideos) {
     }
 }
 echo "Audio extraction script complete"
-
