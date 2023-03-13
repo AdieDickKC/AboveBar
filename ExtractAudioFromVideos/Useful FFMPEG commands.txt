@@ -1,0 +1,16 @@
+--------
+Crop a massive file to something smaller, without re-encoding (so is fairly quick):
+
+ffmpeg -i "2021-11-07 17-57-30.mkv" -ss 0:0:0 -to 01:40:00 -c:v copy -c:a copy "2021-11-07 17-57-30-cropped.mkv"
+
+-ss is the start time, -to is the end time
+
+--------
+Move from mkv container to mp4 container without re-encoding (quick):
+
+ffmpeg -i "2021-11-07 17-57-30-cropped.mkv" -codec copy "2021-11-07 17-57-30-cropped.mp4"
+
+--------
+Touch a file:
+
+copy <filename>+
