@@ -38,7 +38,8 @@ Foreach ($infileObject in $lastVideos) {
         echo "Backup verified, moving mp4 to OneDrive"
         Move-Item "$infile" "C:\Users\ABC Video Recorder\Above Bar Church\Sundays - Documents\Recordings\Raw Video\"
         echo "Deleting obsolete $mkvfile"
-        Remove-Item "$mkvfile"
+ # not deleting the mkv file for now because of corruption issues - Dave Nice April 2022
+ #       Remove-Item "$mkvfile"
     } else {
             echo "Backup NOT verified"
     }
