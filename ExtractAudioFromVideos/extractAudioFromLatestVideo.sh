@@ -55,22 +55,25 @@ do
 	fi
 
 	# back up to external drive, check hash
-	echo "Backing up $INFILEMP4 to backup location $BACKUP_LOCATION"
-	cp "$INFILEMP4" "$BACKUP_LOCATION"
-	cd "$BACKUP_LOCATION"
-	MP4HASH_BACKUP=`md5 -q "$INFILEMP4"`
-	if test "$MP4HASH" != "$MP4HASH_BACKUP";
-	then
-		echo "MP4 backup file does not have the same hash as the original"
-		exit 13
-	fi
+# backup drive is read only currently
+#	echo "Backing up $INFILEMP4 to backup location $BACKUP_LOCATION"
+#	cp "$INFILEMP4" "$BACKUP_LOCATION"
+#	cd "$BACKUP_LOCATION"
+#	MP4HASH_BACKUP=`md5 -q "$INFILEMP4"`
+#	if test "$MP4HASH" != "$MP4HASH_BACKUP";
+#	then
+#		echo "MP4 backup file does not have the same hash as the original"
+#		exit 13
+#	fi
 
 	# move to onedrive
 	echo "Moving files to OneDrive"
 	if [ -e "$VIDEO_LOCATION/$INFILEMP4" ]
 	then
 		echo "Moving $VIDEO_LOCATION/$INFILEMP4 to $ONEDRIVE_VIDEO_LOCATION"
-		mv "$VIDEO_LOCATION/$INFILEMP4" "$ONEDRIVE_VIDEO_LOCATION"
+		cp "$VIDEO_LOCATION/$INFILEMP4" "$ONEDRIVE_VIDEO_LOCATION"
+# temporarily copy rather than moving, until backup drive is fixed
+#		mv "$VIDEO_LOCATION/$INFILEMP4" "$ONEDRIVE_VIDEO_LOCATION"
 	fi
 	if [ -e "$VIDEO_LOCATION/$OUTFILEMP3" ]
 	then
