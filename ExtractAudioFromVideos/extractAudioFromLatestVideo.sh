@@ -4,7 +4,7 @@ export VIDEO_LOCATION="/Users/avteam/Movies"
 export BACKUP_LOCATION="/Volumes/Seagate Backup Plus Drive/ABC Service Videos Backup"
 export ONEDRIVE_VIDEO_LOCATION="/Users/avteam/OneDrive - Above Bar Church/Recordings - Sundays/Raw Video"
 export ONEDRIVE_AUDIO_LOCATION="/Users/avteam/OneDrive - Above Bar Church/Recordings - Sundays/Raw Audio"
-export FFMPEG=/Users/avteam/bin
+export FFMPEG=/Users/avteam/bin/ffmpeg
 
 export MARKER_FILE=DoNotDelete-ProcessedToHere.mp4
 
@@ -36,6 +36,11 @@ cd $VIDEO_LOCATION
 for INFILEMP4 in `find . -newer "$MARKER_FILE" -name "*.mp4"`
 do
 	cd $VIDEO_LOCATION
+	if [ ! -e "$INFILEMP4" ]
+	then
+		echo "Cannot access file $INFILEMP4 - perhaps it had spaces in the file or path name."
+		exit 13
+	fi
 	echo "Processing file $INFILEMP4"
 	MP4HASH=`md5sum "$INFILEMP4"`
 	echo $MP4HASH
