@@ -42,7 +42,7 @@ do
 		exit 13
 	fi
 	echo "Processing file $INFILEMP4"
-	MP4HASH=`md5sum "$INFILEMP4"`
+	MP4HASH=`md5 -q "$INFILEMP4"`
 	echo $MP4HASH
 	# outfile mp3
 	OUTFILEMP3=`echo "$INFILEMP4" | sed 's/mp4/mp3/'`
@@ -58,7 +58,7 @@ do
 	echo "Backing up $INFILEMP4 to backup location $BACKUP_LOCATION"
 	cp "$INFILEMP4" "$BACKUP_LOCATION"
 	cd "$BACKUP_LOCATION"
-	MP4HASH_BACKUP=`md5sum "$INFILEMP4"`
+	MP4HASH_BACKUP=`md5 -q "$INFILEMP4"`
 	if test "$MP4HASH" != "$MP4HASH_BACKUP";
 	then
 		echo "MP4 backup file does not have the same hash as the original"
@@ -80,7 +80,7 @@ do
 
 	#check hash
 	cd "$ONEDRIVE_VIDEO_LOCATION"
-	MP4HASH_ONEDRIVE=`md5sum "$INFILEMP4"`
+	MP4HASH_ONEDRIVE=`md5 -q "$INFILEMP4"`
 	if test "$MP4HASH" != "$MP4HASH_ONEDRIVE";
 	then
 		echo "MP4 file moved to onedrive does not have the same hash as the original"
